@@ -1,0 +1,4 @@
+[[redirects]]
+from = "/api/*"
+to = "http://plantcarehub-001-site1.otempurl.com/:splat"
+status = 200

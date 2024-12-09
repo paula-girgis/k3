@@ -1,0 +1,134 @@
+/* code css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Encode+Sans+Semi+Expanded:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&display=swap');
+:root
+{
+    --main-color:#0aad0a;
+    --light-color:#f0f3f2;
+    --shadow: rgba(145,158,171,.2) 0px 2px 4px -1px,rgba(145,158,171,.14) 0px 4px 5px 0px,rgba(145,158,171,.12) 0px 1px 10px 0px;
+    --font-family:'Oleo Script Swash Caps', sans-serif;
+    --rating-color:#ffc908;
+}
+.font{
+    font-family: 'Oleo Script Swash Caps', cursive;
+    font-size: 80px;
+}
+
+.text-main
+{
+    color: var(--main-color);
+}
+
+.navdiv{
+    background-color: #3a5439;
+    height: 70px;    
+}
+.Color{
+    color: #3a5439;
+}
+.navIn{ 
+    height: 70px;   
+    position: absolute;
+    top: 30px;
+    width: 85% !important;
+}
+.signUp{
+    background-color: #7C967D; 
+}
+.signUp img{
+    height: 20px;
+    padding-right: 10px;
+}
+.regiserBack{
+    background-image: url('assets/gradMaterial/login1.png');
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+.homeBack{
+    background-image: url('assets/gradMaterial/Desktop 7.png');
+    background-size: cover;
+    min-height: 115vh;
+}
+.Flora{
+    background-image: url('assets/gradMaterial/Flora.png');
+    background-size: cover;
+    min-height:1200px;
+}
+.FirstLanding{
+    background-image: url('assets/gradMaterial/La2.png');
+    background-size: cover;
+    background-position: center center;
+    min-height: 120vh;
+}
+.Upload{
+    width: 900px;
+}
+.bttn{
+    background-color: #369336;
+}
+.bttnAboutUs{
+    background-color: #3a5439;
+    
+}
+.SignColor{
+    color: #F0EEFF;
+}
+.custom-shadow {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
+.layer{
+    background-color: #3a5439;
+    min-height: 100vh
+}
+.homeFont{
+    font-family: 'Oleo Script Swash Caps', cursive;
+    font-size: 76px;
+    color: #3A5439;
+}
+.container{
+    width: 85% !important;
+    
+}
+.container2{
+    width: 70% !important;
+}
+.bgColor{
+    background-color: #F0F2F0;
+}
+
+.row{
+    @apply flex flex-wrap py-8 items-center px-4
+}
+
+.btn{
+    @apply px-4 py-2 w-full rounded-lg text-white bg-green-600 cursor-pointer
+}
+
+.plant:hover
+{
+    box-shadow: var(--shadow);
+    border: solid 2px var(--main-color);
+}
+
+.plant .btn 
+{
+    transition: transform 1s , opacity 1s;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.plant:hover .btn 
+{
+    opacity: 1;
+    transform: translateY(0%);
+}
+.rounded-xl {
+  border-radius: 15px;
+}
+.rotate-45 {
+  transform: rotate(45deg);
+}
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
