@@ -15,7 +15,6 @@ export default function FloraCheck() {
 
 
 
-  // بدء الكاميرا
   const startCamera = async () => {
     setIsLoading(true);
     try {
@@ -34,7 +33,7 @@ export default function FloraCheck() {
     }
   };
 
-  // إيقاف الكاميرا
+  
   const stopCamera = () => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => track.stop());
@@ -46,7 +45,7 @@ export default function FloraCheck() {
     setIsCameraOpen(false);
   };
 
-  // التقاط صورة
+
   const capturePhoto = () => {
     if (videoRef.current && videoRef.current.readyState === 4) {
       const canvas = document.createElement("canvas");
@@ -66,7 +65,7 @@ export default function FloraCheck() {
   };
 
 
-  // رفع صورة
+
   const handleUploadPhoto = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("image/")) {
@@ -80,7 +79,7 @@ export default function FloraCheck() {
     }
   };
 
-  // إرسال الصورة إلى الـ API
+  
   const sendToBackend = async () => {
     setIsLoading(true);
     const formData = new FormData();
@@ -108,7 +107,7 @@ export default function FloraCheck() {
     }
   };
 
-  // تحويل بيانات base64 إلى ملف
+  
   const dataUrlToFile = (dataUrl, filename) => {
     const arr = dataUrl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
@@ -132,7 +131,6 @@ export default function FloraCheck() {
       </motion.h2>
 
       <div className="mt-8 flex flex-col items-center space-y-6 w-full">
-        {/* المربع المنقط */}
         <div className="relative border-dashed border-4 border-white rounded-xl shadow-lg p-6 w-3/4 flex items-center justify-center min-h-[300px]">
           {isCameraOpen ? (
             <>
@@ -153,12 +151,9 @@ export default function FloraCheck() {
               src={imagePreviewUrl}
               alt="Preview"
               className="w-auto h-full max-h-[300px] object-contain rounded-lg"
-            />
-          ) : (
-            <p className="text-gray-50">No image or camera feed yet. Start by selecting an option below.</p>
-          )}
+            />) : (
+            <p className="text-gray-50">No image or camera feed yet. Start by selecting an option below.</p>)}
 
-          {/* زر الإغلاق */}
           {(isCameraOpen || imagePreviewUrl) && (
             <button
               onClick={stopCamera}
@@ -169,7 +164,6 @@ export default function FloraCheck() {
           )}
         </div>
 
-        {/* الأزرار */}
         <div className="flex flex-col items-center space-y-4">
           <button
             onClick={startCamera}
@@ -192,7 +186,6 @@ export default function FloraCheck() {
           </label>
         </div>
 
-        {/* إرسال الصورة وعرض النتائج */}
         {imagePreviewUrl && (
           <button
             onClick={sendToBackend}
@@ -227,11 +220,10 @@ export default function FloraCheck() {
               transition={{ delay: 0.6 }}
             >
               <p>{response.chatbotReply}</p>
-            
-            )}
+            </motion.div>
+          
           </motion.div>
         )}
-
 
       </div>
     </main>
