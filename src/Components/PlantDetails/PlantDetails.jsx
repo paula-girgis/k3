@@ -70,11 +70,32 @@ export default function PlantDetails() {
 
                 {/* Cause Section */}
                 <div className="bg-white p-6 rounded-xl shadow-xl">
-                        <h2 className="text-xl font-semibold text-green-700">Cause</h2>
-                        <p className="text-gray-700 mt-2">{plantDetails?.cause || "Cause not available"}</p>
-                    </div>
-            </div>
+  <h2 className="text-xl font-semibold text-green-700">Cause</h2>
+  <p className="text-gray-700 mt-2">
+    {plantDetails?.cause ? (
+      (() => {
+        const cause = plantDetails.cause;
+        const treatmentIndex = cause.indexOf("Treatment");
+        const extractedCause =
+          treatmentIndex >= 0 ? cause.substring(0, treatmentIndex).trim() : cause;
+        const extractedTreatment =
+          treatmentIndex >= 0 ? cause.substring(treatmentIndex).trim() : "No treatment information available";
 
+        return (
+          <>
+            <span>{extractedCause}</span>
+            <div className="mt-4">
+              <h2 className="text-xl font-semibold text-green-700">Treatment</h2>
+              <p className="text-gray-700 mt-2">{extractedTreatment}</p>
+            </div>
+          </>
+        );
+      })()
+    ) : (
+      "Cause not available"
+    )}
+  </p>
+</div>
             <div className="w-2/4 p-16">
                 
                 <div className="">
