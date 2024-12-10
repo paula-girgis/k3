@@ -1,3 +1,5 @@
+
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -8,19 +10,17 @@ export default function PlantDetails() {
     let { id } = useParams();
     const [plantDetails, setPlantDetails] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null); // State for tracking errors
 
     function getPlantDetails(id) {
         axios.get(`/api/library/${id}`)
             .then(({ data }) => {
+
                 console.log(data);
-                setPlantDetails(data);
-                setError(null); // Clear any previous errors
+                setPlantDetails(data);  
                 setIsLoading(false);
             })
-            .catch(err => {
-                console.error("Error fetching plant details:", err);
-                setError("Failed to fetch plant details. Please try again later.");
+            .catch(error => {
+                console.error("Error fetching plant details:", error);
                 setIsLoading(false);
             });
     }
@@ -52,96 +52,90 @@ export default function PlantDetails() {
         );
     }
 
-    if (error) {
-        return (
-            <div className="flex items-center justify-center h-screen bg-red-100">
-                <div className="text-center p-6 bg-white shadow-md rounded-lg">
-                    <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
-                    <p className="text-red-500 mb-4">{error}</p>
-                    <button
-                        onClick={() => getPlantDetails(id)} // Retry button
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-                    >
-                        Retry
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <>
-            <div className="regiserBack">
-                <div className="mx-auto container row py-28">
-                    <h1 className="text-xl mt-10 font-semibold text-green-900 p-5">
-                        {plantDetails?.diseaseName || "Unknown Disease"}
-                    </h1>
-                    <img
-                        className="w-full rounded-xl shadow-2xl h-96 m-5 mb-16"
-                        src={plantDetails?.images?.[0]?.imageUrl || "https://via.placeholder.com/150"}
-                        alt={plantDetails?.diseaseName || "Unknown Disease"}
-                    />
-                    <div className="w-2/4">
-                        <div className="bg-white p-6 rounded-xl shadow-xl">
-                            <h2 className="text-xl font-semibold text-green-700">Cause</h2>
-                            <p className="text-gray-700 mt-2">
-                                {plantDetails?.cause ? (
-                                    (() => {
-                                        const cause = plantDetails.cause;
-                                        const treatmentIndex = cause.indexOf("Treatment");
-                                        const extractedCause =
-                                            treatmentIndex >= 0 ? cause.substring(0, treatmentIndex).trim() : cause;
-                                        const extractedTreatment =
-                                            treatmentIndex >= 0 ? cause.substring(treatmentIndex).trim() : "No treatment information available";
+    <div className='regiserBack'>
+        <div className="mx-auto container row py-28 ">
 
-                                        return (
-                                            <>
-                                                <span>{extractedCause}</span>
-                                                <div className="mt-4">
-                                                    <h2 className="text-xl font-semibold text-green-700">Treatment</h2>
-                                                    <p className="text-gray-700 mt-2">{extractedTreatment}</p>
-                                                </div>
-                                            </>
-                                        );
-                                    })()
-                                ) : (
-                                    "Cause not available"
-                                )}
-                            </p>
+                <h1 className="text-xl mt-10 font-semibold text-green-900  p-5">
+                    {plantDetails?.diseaseName || "Unknown Disease"}
+                </h1>
+                <img
+                    className='w-full rounded-xl shadow-2xl h-96 m-5 mb-16'
+                    src={plantDetails?.images?.[0]?.imageUrl || "https://via.placeholder.com/150"}
+                    alt={plantDetails?.diseaseName || "Unknown Disease"}
+                />
+            <div className="w-2/4">
+
+                {/* Cause Section */}
+                <div className="bg-white p-6 rounded-xl shadow-xl">
+  <h2 className="text-xl font-semibold text-green-700">Cause</h2>
+  <p className="text-gray-700 mt-2">
+    {plantDetails?.cause ? (
+      (() => {
+        const cause = plantDetails.cause;
+        const treatmentIndex = cause.indexOf("Treatment");
+        const extractedCause =
+          treatmentIndex >= 0 ? cause.substring(0, treatmentIndex).trim() : cause;
+        const extractedTreatment =
+          treatmentIndex >= 0 ? cause.substring(treatmentIndex).trim() : "No treatment information available";
+
+        return (
+          <>
+            <span>{extractedCause}</span>
+            <div className="mt-4">
+              <h2 className="text-xl font-semibold text-green-700">Treatment</h2>
+              <p className="text-gray-700 mt-2">{extractedTreatment}</p>
+            </div>
+          </>
+        );
+      })()
+    ) : (
+      "Cause not available"
+    )}
+  </p>
+</div>
+            </div>
+
+            <div className="w-2/4 p-16">
+                
+                <div className="">
+                    {/* Symptoms Section */}
+                    <motion.div
+                        className="mb-4  p-6 bg-green-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
+                        animate={{ x: [0, -10, 10, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                    >
+                        <h2 className="font-semibold text-lg">Symptoms</h2>
+                        <p>{plantDetails?.symptoms || "Symptoms not available"}</p>
+                    </motion.div>
+
+                    {/* Images Section */}
+                    <motion.div
+                        className="mb-4 p-6 bg-yellow-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
+                        animate={{ x: [0, -10, 10, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                    >
+                        <h2 className="font-semibold text-lg">Images</h2>
+                        <div className="flex gap-4 flex-wrap">
+                            {/* Map through the images array and display each image */}
+                            {plantDetails?.images?.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image.imageUrl}  // Use imageUrl from each image object
+                                    alt={`Plant Image ${index + 1}`}
+                                    className="w-44 h-44 rounded-lg shadow-lg"
+                                />
+                            ))}
                         </div>
-                        <div className="w-2/4 p-16">
-                            <div className="">
-                                <motion.div
-                                    className="mb-4 p-6 bg-green-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
-                                    animate={{ x: [0, -10, 10, 0] }}
-                                    transition={{ duration: 0.5, repeat: Infinity }}
-                                >
-                                    <h2 className="font-semibold text-lg">Symptoms</h2>
-                                    <p>{plantDetails?.symptoms || "Symptoms not available"}</p>
-                                </motion.div>
-                                <motion.div
-                                    className="mb-4 p-6 bg-yellow-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
-                                    animate={{ x: [0, -10, 10, 0] }}
-                                    transition={{ duration: 0.5, repeat: Infinity }}
-                                >
-                                    <h2 className="font-semibold text-lg">Images</h2>
-                                    <div className="flex gap-4 flex-wrap">
-                                        {plantDetails?.images?.map((image, index) => (
-                                            <img
-                                                key={index}
-                                                src={image.imageUrl}
-                                                alt={`Plant Image ${index + 1}`}
-                                                className="w-44 h-44 rounded-lg shadow-lg"
-                                            />
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
+        </div>
+    </div>
+
             <Footer />
         </>
     );
+
 }
