@@ -227,16 +227,7 @@ export default function FloraCheck() {
               transition={{ delay: 0.6 }}
             >
               <p>{response.chatbotReply}</p>
-            </motion.div>
-            {response.image && response.imageType && (
-              <motion.img
-                src={data:${response.imageType};base64,${response.image}}
-                alt="Processed"
-                className="mt-6 rounded-lg shadow-md max-h-64 mx-auto"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.9 }}
-              />
+            
             )}
           </motion.div>
         )}
