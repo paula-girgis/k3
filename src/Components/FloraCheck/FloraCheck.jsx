@@ -228,9 +228,9 @@ export default function FloraCheck() {
             >
               <p>{response.chatbotReply}</p>
             </motion.div>
-            {response.Image && response.ImageType && (
+            {response.image && response.imageType && (
               <motion.img
-                src={data:${response.ImageType};base64,${response.Image}}
+                src={data:${response.imageType};base64,${response.image}}
                 alt="Processed"
                 className="mt-6 rounded-lg shadow-md max-h-64 mx-auto"
                 initial={{ scale: 0.8, opacity: 0 }}
