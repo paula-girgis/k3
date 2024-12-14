@@ -18,7 +18,7 @@ import ForgetPassword from './Components/ForgetPassword/ForgetPassword'
 import VerificationCode from './Components/VerificationCode/VerificationCode'
 import NewPassword from './Components/NewPassword/NewPassword'
 import PlantDetails from './Components/PlantDetails/PlantDetails'
-import EmailConfirmation from './Components/EmailConfirmation/emailConfirmation'
+import EmailConfirmation from './Components/emailConfirmation/emailConfirmation'
 
 
 const router = createBrowserRouter([
