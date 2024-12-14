@@ -1,4 +1,3 @@
-
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './Components/Layout/Layout'
@@ -19,7 +18,7 @@ import ForgetPassword from './Components/ForgetPassword/ForgetPassword'
 import VerificationCode from './Components/VerificationCode/VerificationCode'
 import NewPassword from './Components/NewPassword/NewPassword'
 import PlantDetails from './Components/PlantDetails/PlantDetails'
-
+import EmailConfirmation from './Components/emailConfirmation/emailConfirmation'
 
 
 const router = createBrowserRouter([
@@ -40,6 +39,7 @@ const router = createBrowserRouter([
     {path: 'NewPassword', element: <NewPassword/>},
     {path: 'register', element:  <Register/>},
     {path: 'login', element: <Login/>},
+    {path: 'emailConfirmation', element: <EmailConfirmation/>},
     {path: '*', element: <NotFound/>},  
 ]},  
 ]);
