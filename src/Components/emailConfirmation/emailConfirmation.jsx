@@ -19,7 +19,7 @@ export default function EmailConfirmation() {
     // API Call
     const fetchConfirmation = async () => {
       try {
-        const response = await fetch(`/api/User/emailConfirmation?token=${token}&email=${email}`);
+        const response = await fetch(`/User/emailConfirmation?token=${token}&email=${email}`);
         const data = await response.json();
 
         if (response.ok && response?.data?.message === "Email verified successfully") {
