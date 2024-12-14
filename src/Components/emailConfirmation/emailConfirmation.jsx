@@ -19,7 +19,10 @@ export default function EmailConfirmation() {
     // API Call
     const fetchConfirmation = async () => {
       try {
-        const response = await fetch(`/User/emailConfirmation?token=${token}&email=${email}`);
+        const response = await axios.get("/api/User/emailConfirmation", {
+        params: { token, email }
+        });
+
         const data = await response.json();
 
         if (response.ok && response?.data?.message === "Email verified successfully") {
