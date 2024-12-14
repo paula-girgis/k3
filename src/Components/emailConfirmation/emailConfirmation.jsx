@@ -25,7 +25,7 @@ export default function EmailConfirmation() {
         if (response.ok && data?.message === "Email verified successfully") {
           setMessage("Your email is verified successfully.");
         } else {
-          setMessage(data?.message || "An error occured while confirming your email");
+          setMessage(data?.message);
         }
       } catch (error) {
         setMessage("Failed to connect to the server.");
