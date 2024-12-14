@@ -19,13 +19,13 @@ export default function EmailConfirmation() {
     // API Call
     const fetchConfirmation = async () => {
       try {
-        const response = await fetch(`/api/User/emailConfirmation?token=${encodedToken}&email=${encodedEmail}`);
+        const response = await fetch(`/api/User/emailConfirmation?token=${token}&email=${email}`);
         const data = await response.json();
 
-        if (response.ok && data?.message === "Email verified successfully.") {
+        if (response.ok && data?.message === "Email verified successfully") {
           setMessage("Your email is verified successfully.");
         } else {
-          setMessage(data?.message || "An error occurred while verifying your email.");
+          setMessage(data?.message || "An error occured while confirming your email");
         }
       } catch (error) {
         setMessage("Failed to connect to the server.");
