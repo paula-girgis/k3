@@ -22,10 +22,10 @@ export default function EmailConfirmation() {
         const response = await fetch(`/api/User/emailConfirmation?token=${token}&email=${email}`);
         const data = await response.json();
 
-        if (response.ok && data?.message === "Email verified successfully") {
+        if (response.ok && response?.data?.message === "Email verified successfully") {
           setMessage("Your email is verified successfully.");
         } else {
-          setMessage(data?.message);
+          setMessage(response?.data?.message);
         }
       } catch (error) {
         setMessage("Failed to connect to the server.");
