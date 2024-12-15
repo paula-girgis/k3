@@ -105,14 +105,15 @@ export default function PlantDetails() {
                                 <h2 className="font-semibold text-lg">Images</h2>
                                 <div className="flex gap-4 flex-wrap">
                                     {/* Map through the images array and display each image */}
-                                    {plantDetails?.images?.map((image, index) => (
-                                        <img
-                                            key={index}
-                                            src={image.imageUrl}  // Use imageUrl from each image object
-                                            alt={Plant Image ${index + 1}}
-                                            className="w-44 h-44 rounded-lg shadow-lg"
-                                        />
-                                    ))}
+{plantDetails?.images?.map((image, index) => (
+    <img
+        key={index}
+        src={image.imageUrl}  // Use imageUrl from each image object
+        alt={`Plant Image ${index + 1}`}  // Corrected template literal
+        className="w-44 h-44 rounded-lg shadow-lg"
+    />
+))}
+
                                 </div>
                             </motion.div>
                         </div>
