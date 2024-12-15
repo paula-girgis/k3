@@ -85,7 +85,7 @@ export default function Plants() {
 
   return <>  
         <div className="bg-gray-200 pt-20">
-            <motion.h2 className="homeFont font-extrabold sm:text-2xl lg:text-5xl text-center p-4" initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}transition={{ duration: 1 }}>
+            <motion.h2 className="homeFont  font-extrabold sm:text-2xl lg:text-5xl text-center p-4" initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}transition={{ duration: 1 }}>
                 "Every drooping leaf is a story untold"
             </motion.h2>
           
@@ -110,7 +110,7 @@ export default function Plants() {
 
         </div>
 
-      <div className='py-10'>
+ 
       <div className="row container mx-auto "> 
 
 
@@ -118,7 +118,7 @@ export default function Plants() {
   {!Plants || Plants.length === 0 ? (
   <div>No plants available</div>) : (
   Plants.map((plant) => (
-    <div key={plant.imageId} className="w-1/4 p-2 my-4 ">
+    <div key={plant.imageId} className="w-1/4 p-1">
       <div className="plant mt-2 me-4">
         <Link to={`/plantDetails/${plant.diseaseId}`}>
           <img className="w-full h-48 rounded-2xl" src={plant.imageUrl} alt={plant.plantName || "Unknown Plant"} />
@@ -137,7 +137,7 @@ export default function Plants() {
 
 </div>
 </div>
-        </div>
+
 
   </>
 }
