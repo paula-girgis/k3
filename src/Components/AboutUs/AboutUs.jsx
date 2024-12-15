@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion';
-import Web from '../../assets/gradMaterial/WEB2.jpeg'; 
+import Web from '../../assets/gradMaterial/WEB2.jpg'; 
 
 export default function AboutUs() {
   return <>
