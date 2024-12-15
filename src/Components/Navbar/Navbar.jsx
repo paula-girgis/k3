@@ -1,4 +1,5 @@
 
+
 import { NavLink, useNavigate } from 'react-router-dom';
 import plantCareLogo from '../../assets/gradMaterial/logo.png';
 import { useContext, useState } from 'react';
@@ -19,22 +20,24 @@ export default function Navbar() {
     <>
       <div className="navdiv flex items-center justify-center shadow-2xl px-2 sm:px-6 lg:px-28 pb-4">
         <nav className="navIn shadow-2xl bg-gray-100 rounded-full flex items-center justify-between ps-4 lg:w-auto relative">
-          {/* Logo */}
+          
+
           <div className="flex items-center">
-            <img className="h-12 lg:h-16 w-auto" src={plantCareLogo} alt="plantCareLogo"/>
+            <img className="h-16 lg:h-20 w-30" src={plantCareLogo} alt="plantCareLogo"/>
+    
           </div>
+
 
           {/* Toggle Button */}
           <button
             className="block lg:hidden text-green-900 text-2xl ml-auto pe-6"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+            onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <i className={`fa-solid ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
 
           {/* Navbar Links */}
           <ul
-            className={`absolute lg:static top-0 left-0 w-full lg:w-auto bg-gray-50 lg:bg-transparent lg:flex lg:space-x-3 lg:mx-32 rounded-xl lg:rounded-none p-6 lg:p-0 z-10 transition-all ${
+            className={`absolute lg:static top-0  left-0 w-full lg:w-auto bg-gray-50 lg:bg-transparent lg:flex lg:space-x-3 lg:mx-32 rounded-xl lg:rounded-none p-10 lg:p-0 z-10 transition-all ${
               isMenuOpen ? 'block' : 'hidden'
             }`}
           >
@@ -80,8 +83,7 @@ export default function Navbar() {
                 {/* Logout Icon */}
                 <li
                   className="text-center my-2 lg:hidden cursor-pointer text-red-900 text-lg "
-                  onClick={LogOut}
-                >
+                  onClick={LogOut}>
                   <i className="fa-solid fa-right-from-bracket "></i>
                 </li>
               </>
