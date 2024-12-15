@@ -10,7 +10,7 @@ export default function PlantDetails() {
     const [isLoading, setIsLoading] = useState(true);
 
     function getPlantDetails(id) {
-        axios.get(/api/library/${id})
+        axios.get(`/api/library/${id}`)
             .then(({ data }) => {
                 console.log(data);
                 setPlantDetails(data);  
