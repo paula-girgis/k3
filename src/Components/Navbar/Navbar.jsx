@@ -1,7 +1,7 @@
 
 
 import { NavLink, useNavigate } from 'react-router-dom';
-import plantCareLogo from '../../assets/gradMaterial/logo.png';
+import plantCareLogo from '../../assets/gradMaterial/logo.jpg';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Context/UserContext';
 
