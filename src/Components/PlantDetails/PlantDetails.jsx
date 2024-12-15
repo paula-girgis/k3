@@ -10,9 +10,10 @@ export default function PlantDetails() {
     const [isLoading, setIsLoading] = useState(true);
 
     function getPlantDetails(id) {
-        axios.get(`/api/library/${id}`)
+        axios.get(/api/library/${id})
             .then(({ data }) => {
-                setPlantDetails(data);
+                console.log(data);
+                setPlantDetails(data);  
                 setIsLoading(false);
             })
             .catch(error => {
@@ -50,124 +51,75 @@ export default function PlantDetails() {
 
     return (
         <>
-            <div className="registerBack">
-                <div className="mx-auto container row py-28">
+            <div className='regiserBack'>
+                <div className="mx-auto container row py-28 ">
                     <h1 className="text-xl mt-10 font-semibold text-green-900 p-5">
                         {plantDetails?.diseaseName || "Unknown Disease"}
                     </h1>
                     <img
-                        className="w-full rounded-xl shadow-2xl h-96 m-5 mb-16"
+                        className='w-full rounded-xl shadow-2xl h-96 m-5 mb-16'
                         src={plantDetails?.images?.[0]?.imageUrl || "https://via.placeholder.com/150"}
                         alt={plantDetails?.diseaseName || "Unknown Disease"}
                     />
-<div className="w-2/4">
-    {/* Cause and Treatment Combined Section */}
-    <div className="bg-white p-6 rounded-xl shadow-xl">
-        <h2 className="text-xl font-semibold text-green-700">Cause</h2>
-        <div className="text-gray-700 mt-2">
-            {plantDetails?.cause ? (
-                (() => {
-                    const cause = plantDetails.cause;
 
-                    // Split the cause into "Cause" and "Treatment" parts
-                    const treatmentIndex = cause.indexOf("Treatment");
-                    const extractedCause = treatmentIndex >= 0 ? cause.substring(0, treatmentIndex).trim() : cause;
-                    const extractedTreatment = treatmentIndex >= 0 ? cause.substring(treatmentIndex).trim() : null;
-
-                    return (
-                        <>
-                            {/* Display Cause */}
-                            <div>
-                                <h3 className="text-lg font-bold mt-4">Cause</h3>
-                                <ul className="list-disc list-inside ml-4">
-                                    <li><strong>Fungus:</strong> Gymnosporangium juniperi-virginianae alternates between apple and cedar/juniper trees.</li>
-                                    <li><strong>Weather:</strong> Thrives in warm, wet spring conditions.</li>
-                                    <li><strong>Transmission:</strong> Windborne spores from cedar galls infect apple trees.</li>
-                                </ul>
-                            </div>
-
-                            {/* Display Treatment if exists */}
-                            {extractedTreatment && (
-                                <div className="mt-6">
-                                    <h3 className="text-lg font-bold mt-4">Treatment</h3>
-                                    <ul className="list-disc list-inside ml-4">
-                                        <li><strong>Cultural Practices:</strong>
-                                            <ul className="list-disc list-inside ml-6">
-                                                <li>Avoid planting apple trees near cedars/junipers.</li>
-                                                <li>Prune and destroy infected branches or galls in winter.</li>
-                                                <li>Clear debris around apple trees.</li>
-                                            </ul>
-                                        </li>
-                                        <li><strong>Chemical Controls:</strong>
-                                            <ul className="list-disc list-inside ml-6">
-                                                <li>Apply fungicides (e.g., myclobutanil, propiconazole) during the pink-bud stage and wet weather.</li>
-                                            </ul>
-                                        </li>
-                                        <li><strong>Biological Controls:</strong>
-                                            <ul className="list-disc list-inside ml-6">
-                                                <li>Plant rust-resistant apple varieties (e.g., ‘Liberty,’ ‘Enterprise’).</li>
-                                            </ul>
-                                        </li>
-                                        <li><strong>Environmental Management:</strong>
-                                            <ul className="list-disc list-inside ml-6">
-                                                <li>Ensure good airflow and sunlight with proper pruning.</li>
-                                                <li>Provide adequate water and nutrients to reduce stress.</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                    <div className="w-2/4">
+                        {/* Cause Section */}
+                        <div className="bg-white p-6 rounded-xl shadow-xl">
+                            <h2 className="text-xl font-semibold text-green-700">Cause and Treatment</h2>
+                            {plantDetails?.cause ? (
+                                <div
+                                    className="text-gray-700 mt-2"
+                                    dangerouslySetInnerHTML={{ __html: plantDetails.cause }}
+                                />
+                            ) : (
+                                <p>Cause not available</p>
                             )}
-                        </>
-                    );
-                })()
-            ) : (
-                <p>Cause not available</p>
-            )}
-        </div>
-    </div>
-</div>
-
-
-
+                        </div>
+                    </div>
 
                     <div className="w-2/4 p-16">
-                        {/* Symptoms Section */}
-                        <motion.div
-                            className="mb-4 p-6 bg-green-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
-                            animate={{ x: [0, -10, 10, 0] }}
-                            transition={{ duration: 0.5, repeat: Infinity }}
-                        >
-                            <h2 className="font-semibold text-xl mb-2">Symptoms</h2>
-                            <div
-                                className="text-white leading-relaxed"
-                                dangerouslySetInnerHTML={{
-                                    __html: plantDetails?.symptoms || "<p>Symptoms not available</p>",
-                                }}
-                            ></div>
-                        </motion.div>
-
-                        {/* Images Section */}
-                        <motion.div
-                            className="mb-4 p-6 bg-yellow-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
-                            animate={{ x: [0, -10, 10, 0] }}
-                            transition={{ duration: 0.5, repeat: Infinity }}
-                        >
-                            <h2 className="font-semibold text-lg">Images</h2>
-                            <div className="flex gap-4 flex-wrap">
-                                {/* Map through the images array and display each image */}
-                                {plantDetails?.images?.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image.imageUrl}
-                                        alt={`Plant Image ${index + 1}`}
-                                        className="w-44 h-44 rounded-lg shadow-lg"
+                        <div className="">
+                            {/* Symptoms Section */}
+                            <motion.div
+                                className="mb-4 p-6 bg-green-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
+                                animate={{ x: [0, -10, 10, 0] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                            >
+                                <h2 className="font-semibold text-lg">Symptoms</h2>
+                                {plantDetails?.symptoms ? (
+                                    <div
+                                        className="text-white-700 mt-2"
+                                        dangerouslySetInnerHTML={{ __html: plantDetails.symptoms }}
                                     />
-                                ))}
-                            </div>
-                        </motion.div>
+                                ) : (
+                                    <p>Symptoms not available</p>
+                                )}
+                            </motion.div>
+
+                            {/* Images Section */}
+                            <motion.div
+                                className="mb-4 p-6 bg-yellow-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
+                                animate={{ x: [0, -10, 10, 0] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                            >
+                                <h2 className="font-semibold text-lg">Images</h2>
+                                <div className="flex gap-4 flex-wrap">
+                                    {/* Map through the images array and display each image */}
+                                    {plantDetails?.images?.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            src={image.imageUrl}  // Use imageUrl from each image object
+                                            alt={Plant Image ${index + 1}}
+                                            className="w-44 h-44 rounded-lg shadow-lg"
+                                        />
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <Footer />
         </>
     );
