@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -49,11 +50,15 @@ export default function PlantDetails() {
         );
     }
 
+    // Split Cause and Treatment text
+    const causeText = plantDetails?.cause?.split('Treatment')[0]; 
+    const treatmentText = plantDetails?.cause?.split('Treatment')[1];
+
     return (
         <>
             <div className='regiserBack'>
-                <div className="mx-auto container row py-28 ">
-                    <h1 className="text-xl mt-10 font-semibold text-green-900 p-5">
+                <div className="mx-auto container row py-16">
+                    <h1 className="text-xl mt-10 font-semibold text-green-900 p-3">
                         {plantDetails?.diseaseName || "Unknown Disease"}
                     </h1>
                     <img
@@ -62,61 +67,87 @@ export default function PlantDetails() {
                         alt={plantDetails?.diseaseName || "Unknown Disease"}
                     />
 
-                    <div className="w-2/4">
+                    {/* Grid layout for the 4 sections */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+
                         {/* Cause Section */}
-                        <div className="bg-white p-6 rounded-xl shadow-xl">
-                            <h2 className="text-xl font-semibold text-green-700">Cause and Treatment</h2>
-                            {plantDetails?.cause ? (
+                        <motion.div
+                            className="p-6 bg-green-600 bg-opacity-40 rounded-3xl shadow-2xl hover:scale-105 transform transition-all duration-500"
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1 }}
+                        >
+                            <h2 className="text-xl font-semibold text-black">Cause</h2>
+                            {causeText ? (
                                 <div
-                                    className="text-gray-700 mt-2"
-                                    dangerouslySetInnerHTML={{ __html: plantDetails.cause }}
+                                    className="text-gray-900 mt-2 animate-shake"
+                                    dangerouslySetInnerHTML={{ __html: causeText }}
                                 />
                             ) : (
-                                <p>Cause not available</p>
+                                <p className="text-black">Cause not available</p>
                             )}
-                        </div>
+                        </motion.div>
+
+                        {/* Treatment Section */}
+                        <motion.div
+                            className="p-6 bg-yellow-600 bg-opacity-40 rounded-3xl shadow-2xl hover:scale-105 transform transition-all duration-500"
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1.2 }}
+                        >
+                            <h2 className="text-xl font-semibold text-black">Treatment</h2>
+                            {treatmentText ? (
+                                <div
+                                    className="text-gray-900 mt-2 animate-shake"
+                                    dangerouslySetInnerHTML={{ __html: treatmentText }}
+                                />
+                            ) : (
+                                <p className="text-black">Treatment not available</p>
+                            )}
+                        </motion.div>
+
                     </div>
 
-                    <div className="w-2/4 p-16">
-                        <div className="">
-                            {/* Symptoms Section */}
-                            <motion.div
-                                className="mb-4 p-6 bg-green-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
-                                animate={{ x: [0, -10, 10, 0] }}
-                                transition={{ duration: 0.5, repeat: Infinity }}
-                            >
-                                <h2 className="font-semibold text-lg">Symptoms</h2>
-                                {plantDetails?.symptoms ? (
-                                    <div
-                                        className="text-white-700 mt-2"
-                                        dangerouslySetInnerHTML={{ __html: plantDetails.symptoms }}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-8">
+                        {/* Symptoms Section */}
+                        <motion.div
+                            className="p-6 bg-green-700 bg-opacity-40 text-white rounded-3xl shadow-2xl hover:scale-105 transform transition-all duration-500"
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.3 }}
+                        >
+                            <h2 className="font-semibold text-lg text-black">Symptoms</h2>
+                            {plantDetails?.symptoms ? (
+                                <div
+                                    className="text-gray-900 mt-2 animate-shake"
+                                    dangerouslySetInnerHTML={{ __html: plantDetails.symptoms }}
+                                />
+                            ) : (
+                                <p className="text-black">Symptoms not available</p>
+                            )}
+                        </motion.div>
+
+                        {/* Images Section */}
+                        <motion.div
+                            className=" bg-yellow-700 bg-opacity-40 p-10 text-white rounded-3xl shadow-2xl hover:scale-105 transform transition-all duration-500"
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.4 }}
+                        >
+                            <h2 className="font-semibold text-lg p-2 text-black">Images</h2>
+                            <div className="flex gap-4 flex-wrap">
+                                {/* Map through the images array and display each image */}
+                                {plantDetails?.images?.map((image, index) => (
+                                    <img
+                                        key={index}
+                                        src={image.imageUrl} 
+                                        alt={`Plant Image ${index + 1}`}  
+                                        className="w-44 h-44 rounded-lg shadow-lg"
                                     />
-                                ) : (
-                                    <p>Symptoms not available</p>
-                                )}
-                            </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
 
-                            {/* Images Section */}
-                            <motion.div
-                                className="mb-4 p-6 bg-yellow-700 text-white rounded-xl shadow-xl hover:scale-105 transform transition-all duration-300"
-                                animate={{ x: [0, -10, 10, 0] }}
-                                transition={{ duration: 0.5, repeat: Infinity }}
-                            >
-                                <h2 className="font-semibold text-lg">Images</h2>
-                                <div className="flex gap-4 flex-wrap">
-                                    {/* Map through the images array and display each image */}
-{plantDetails?.images?.map((image, index) => (
-    <img
-        key={index}
-        src={image.imageUrl}  // Use imageUrl from each image object
-        alt={`Plant Image ${index + 1}`}  // Corrected template literal
-        className="w-44 h-44 rounded-lg shadow-lg"
-    />
-))}
-
-                                </div>
-                            </motion.div>
-                        </div>
                     </div>
                 </div>
             </div>
