@@ -1,7 +1,6 @@
 
-
 import React from 'react'
-import plantCareLogo from '../../assets/gradMaterial/logo.jpg';
+import plantCareLogo from '../../assets/gradMaterial/logo.png';
 
 export default function Footer() {
   return (
@@ -11,7 +10,7 @@ export default function Footer() {
         {/* Logo and Description Section */}
         <div className="text-center md:text-left mb-6 md:mb-0">
           <div className="flex items-center justify-center md:justify-start">
-            <img src={plantCareLogo} alt="PlantCare" className="w-36 h-36" />
+            <img src={plantCareLogo} alt="PlantCare" className="w-full h-40" />
           </div>
         </div>
 
